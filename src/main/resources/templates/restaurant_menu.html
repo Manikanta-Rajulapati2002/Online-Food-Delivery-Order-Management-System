@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurant Menu</title>
+</head>
+<body>
+<h1>Menu - <span th:text="${restaurant.name}"></span></h1>
+
+<form action="#" th:action="@{/order}" method="post">
+    <input type="hidden" name="restaurantId" th:value="${restaurant.id}" />
+
+    <ul>
+        <li th:each="menuItem : ${menuItems}">
+            <input type="checkbox" name="menuItemIds" th:value="${menuItem.id}" />
+            <span th:text="${menuItem.name}"></span> -
+            <span th:text="${menuItem.price}"></span> USD
+        </li>
+    </ul>
+
+    <button type="submit">Place Order</button>
+</form>
+
+<p><a th:href="@{/restaurants}">Back to Restaurants</a></p>
+</body>
+</html>

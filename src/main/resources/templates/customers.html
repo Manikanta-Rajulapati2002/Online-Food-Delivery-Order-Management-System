@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer List</title>
+</head>
+<body>
+<h1>Registered Customers</h1>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.name}">Name</td>
+        <td th:text="${customer.email}">Email</td>
+    </tr>
+</table>
+<br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

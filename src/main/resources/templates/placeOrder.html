@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Place Order - SA SQUARE Food Delivery</title>
+</head>
+<body>
+<h1>Menu Items</h1>
+
+<form th:action="@{/place-order}" method="post">
+    <div th:each="menuItem : ${menuItems}">
+        <input type="checkbox" th:name="menuItemIds" th:value="${menuItem.id}" />
+        <span th:text="${menuItem.name}">Item Name</span> -
+        <span th:text="${menuItem.price}">Item Price</span>
+        <br/>
+    </div>
+
+    <button type="submit">Place Order</button>
+</form>
+
+<br/>
+<a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Confirmation - SA SQUARE Food Delivery</title>
+</head>
+<body>
+<h1>Order Placed Successfully!</h1>
+
+<p>Your Order ID is: <span th:text="${order.id}">Order ID</span></p>
+<p>Total Price: $<span th:text="${order.totalPrice}">Total Price</span></p>
+<p>Status: <span th:text="${order.status}">Order Status</span></p>
+
+<br/>
+<a th:href="@{'/order/' + ${order.id}}">Check Order Status</a> |
+<a href="/">Back to Home</a>
+</body>
+</html>

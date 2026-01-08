@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - SA SQUARE Food Delivery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #f8f9fa, #e3f2fd);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dashboard-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .btn-primary {
+            background-color: #0069d9;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #004c9b;
+        }
+
+        h2 {
+            font-weight: 600;
+            color: #343a40;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="dashboard-container">
+        <h2 class="text-center mb-4">📦 Admin Dashboard - Latest Orders</h2>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-outline-dark me-2">🏠 Home</a>
+            <a href="/admin/menu" class="btn btn-warning me-2">🍽 Manage Menu</a>
+            <a href="/admin/logout" class="btn btn-danger">🚪 Logout</a>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Display latest orders at the top by reversing -->
+            <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+                <td th:text="${order.customer != null ? order.customer.name : 'N/A'}"></td>
+                <td><span th:text="${order.totalPrice}"></span> USD</td>
+                <td><span class="badge bg-info text-dark" th:text="${order.status}"></span></td>
+                <td>
+                    <form th:action="@{/admin/update-status}" method="post" class="d-flex">
+                        <input type="hidden" name="orderId" th:value="${order.id}"/>
+                        <select name="status" class="form-select me-2">
+                            <option th:each="s : ${T(com.sunny.fooddelivery.model.OrderStatus).values()}"
+                                    th:value="${s}" th:text="${s}"
+                                    th:selected="${s} == ${order.status}">Status</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

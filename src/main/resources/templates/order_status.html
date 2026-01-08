@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Tracking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Track Your Order</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Order ID: <span th:text="${order.id}"></span></h5>
+            <p class="card-text"><strong>Status:</strong> <span th:text="${order.status}"></span></p>
+            <p class="card-text"><strong>Placed on:</strong>
+                <span th:text="${#temporals.format(order.orderTime, 'dd MMM yyyy, hh:mm a')}"></span></p>
+            <p class="card-text"><strong>Total:</strong> <span th:text="${order.totalPrice} + ' USD'"></span></p>
+
+            <h5 class="mt-4">Items</h5>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="item : ${order.orderItems}">
+                    <strong th:text="${item.menuItem.name}"></strong>
+                    - Qty: <span th:text="${item.quantity}"></span>
+                    - Price: <span th:text="${item.price}"></span> USD
+                </li>
+            </ul>
+
+            <div class="mt-4 text-center">
+                <a href="/home" class="btn btn-outline-dark">Back to Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

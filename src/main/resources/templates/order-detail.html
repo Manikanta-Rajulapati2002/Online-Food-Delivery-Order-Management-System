@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Detail</title>
+</head>
+<body>
+<h1>Order Details</h1>
+<p>Order ID: <span th:text="${order.id}"></span></p>
+<p>Total Price: $<span th:text="${order.totalPrice}"></span></p>
+<p>Status: <span th:text="${order.status}"></span></p>
+
+<h2>Ordered Items:</h2>
+<ul>
+    <li th:each="item : ${order.orderItems}">
+        <span th:text="${item.menuItem.name}"></span> -
+        $<span th:text="${item.price}"></span>
+    </li>
+</ul>
+
+<a href="/">Go Home</a>
+</body>
+</html>
